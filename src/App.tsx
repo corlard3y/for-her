@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import { LogSnag } from "@logsnag/node";
 
 const logsnag = new LogSnag({
-  token: "LOGSNAG_TOKEN",
-  project: "PROJECT_NAME",
+  token: import.meta.env.VITE_APP_LOGSNAG_TOKEN, // Access the env variable
+  project: import.meta.env.VITE_APP_PROJECT_NAME,
 });
 
 const track = async () => {
   await logsnag.track({
-    channel: "yes",
-    event: "Valentine's Day",
+    channel: "marry-me",
+    event: "Marry me",
     description: "She said yes!",
     icon: "💖",
     notify: true,
@@ -22,17 +22,16 @@ const track = async () => {
 function App() {
   const steps = [
     {
-      content: "Heyyyyy, pretty girl.",
+      content: "Heyyyy, my Mango",
       image: "/character/one.png",
     },
     {
-      content: `Recently, we met.
-      And somehow, you've been on my mind ever since.
+      content: `Met you 2 years, 1 month ago and I could not take my mind off you.
       `,
       image: "/character/two.png",
     },
     {
-      content: `Then we went on our first date…And I realized—yep, I want this girl. For life.
+      content: `Then I saw you a little over a year ago …And I realized—yep, I want this girl. For life.
       `,
       image: "/character/three.png",
     },
@@ -51,12 +50,12 @@ hold your hands, and look into your pretty eyes.`,
       image: "/character/six.png",
     },
     {
-      content: "Will you be my Valentine?",
+      content: "Will you marry me?",
       image: "/character/seven.png",
     },
   ];
   const [currentStep, setCurrentStep] = useState(0);
-  const [sheWantsToBeMyValentine, setSheWantsToBeMyValentine] = useState(false);
+  const [sheWantsToBeMyWife, setsheWantsToBeMyWife] = useState(false);
   const { width, height } = useWindowSize();
 
   useEffect(() => {
@@ -73,7 +72,7 @@ hold your hands, and look into your pretty eyes.`,
 
   return (
     <>
-      {sheWantsToBeMyValentine && (
+      {sheWantsToBeMyWife && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -112,7 +111,7 @@ hold your hands, and look into your pretty eyes.`,
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="font-josefin text-4xl font-bold"
+          className="font-josefin text-4xl font-bold text-center"
         >
           {steps[currentStep].content}
         </motion.div>
@@ -139,7 +138,7 @@ hold your hands, and look into your pretty eyes.`,
           <>
             <button
               onClick={async () => {
-                setSheWantsToBeMyValentine(true);
+                setsheWantsToBeMyWife(true);
                 await track();
               }}
               className="bg-white text-[#FFC5D3] py-3 text-xl rounded-xl w-full mt-10 font-semibold"
@@ -149,7 +148,7 @@ hold your hands, and look into your pretty eyes.`,
 
             <button
               onClick={async () => {
-                setSheWantsToBeMyValentine(true);
+                setsheWantsToBeMyWife(true);
                 await track();
               }}
               className="bg-white text-[#FFC5D3] py-3 text-xl rounded-xl w-full mt-2 font-semibold"
